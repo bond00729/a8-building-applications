@@ -1,11 +1,14 @@
 library(plotly)
 library(shiny)
 library(dplyr)
-source("build_visual.R")
+
+
 data <- iris
 
 shinyServer(function(input, output) {
   output$graph <- renderPlotly({
-    build_visual(data)
+    
+    plot_ly(data, x = data[, input$xAxisChoice], y = data[, input$yAxisChoice], mode = "markers",
+            color = Species)
   })
 })
